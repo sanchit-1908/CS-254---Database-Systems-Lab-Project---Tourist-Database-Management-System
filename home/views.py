@@ -1,11 +1,16 @@
 from django.shortcuts import render,HttpResponse
 
+from itme.models import Category,item
+
 # Create your views here.
 
 def index(request):
     # return HttpResponse("this is home page .")
+    
+    items = item.objects.filter(isSold= False)[0:6]
+    categories = Category.objects.all()
       
-    return render(request,'index.html')
+    return render(request,'index.html',{'categories':categories,'item' : items,})
 
 def about(request):
     return render(request,"about.html")
